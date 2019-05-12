@@ -49,13 +49,13 @@ class Service extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'code' => 'Code',
-            'price' => 'Price',
-            'description' => 'Description',
-            'status' => 'Status',
-            'city' => 'City',
-            'validity' => 'Validity',
+            'name' => 'Название',
+            'code' => 'Код',
+            'price' => 'Цена',
+            'description' => 'Описание',
+            'status' => 'Статус',
+            'city' => 'Город действия',
+            'validity' => 'Срок действия',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
