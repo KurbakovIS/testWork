@@ -28,6 +28,9 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    const ROLE_USER = 1;
+    const ROLE_OPER = 5;
+    const ROLE_ADMIN = 10;
 
     /**
      * {@inheritdoc}
@@ -37,6 +40,52 @@ class User extends ActiveRecord implements IdentityInterface
         return '{{%user}}';
     }
 
+    /**
+     * @return array
+     */
+    public static function roles()
+    {
+        return [
+            self::ROLE_USER => Yii::t('app', 'User'),
+            self::ROLE_ADMIN => Yii::t('app', 'Admin'),
+            self::ROLE_OPER => Yii::t('app', 'Operator'),
+        ];
+    }
+
+    /**
+     * Название роли
+     * @param int $id
+     * @return mixed|null
+     */
+    public function getRoleName(int $id)
+    {
+        $list = self::roles();
+        return $list[$id] ?? null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return ($this->role == self::ROLE_ADMIN);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isManager()
+    {
+        return ($this->role == self::ROLE_OPER);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isUser()
+    {
+        return ($this->role == self::ROLE_USER);
+    }
     /**
      * {@inheritdoc}
      */

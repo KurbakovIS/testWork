@@ -2,9 +2,12 @@
 
 namespace backend\controllers;
 
+use common\models\User;
 use Yii;
 use app\models\Service;
 use app\models\ServiceSearch;
+use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,8 +23,30 @@ class ServiceController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+//                    [
+//                        'denyCallback' => function($rule, $action) {
+//                            return $this->redirect(Url::toRoute(['/site/login']));
+//                        },
+//                        'allow' => false,
+//                        'roles' => ['?'],
+//                    ],
+                    [
+                        'actions' => [],
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'matchCallback' => function ($rule, $action) {
+                            /** @var User $user */
+                            $user = Yii::$app->user->getIdentity();
+                            return $user->isAdmin() || $user->isManager();
+                        }
+                    ],
+                ],
+            ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
