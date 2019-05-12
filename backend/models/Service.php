@@ -3,7 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "service".
@@ -18,6 +20,7 @@ use yii\db\ActiveRecord;
  * @property string $validity
  * @property string $created_at
  * @property string $updated_at
+ * @property string transferred_date
  */
 class Service extends ActiveRecord
 {
@@ -28,7 +31,19 @@ class Service extends ActiveRecord
     {
         return 'service';
     }
-
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at']
+                ],
+                'value' => new Expression('NOW()')
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */

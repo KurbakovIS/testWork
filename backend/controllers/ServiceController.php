@@ -9,6 +9,7 @@ use app\models\ServiceSearch;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -23,6 +24,7 @@ class ServiceController extends Controller
     public function behaviors()
     {
         return [
+
             'access' => [
                 'class' => AccessControl::class,
                 'rules' => [
@@ -86,9 +88,18 @@ class ServiceController extends Controller
      * Creates a new Service model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws HttpException
+     * @throws \Throwable
      */
     public function actionCreate()
     {
+        /** @var $user User */
+        $user = Yii::$app->user->getIdentity();
+        if (!$user || !in_array($user->role, [User::ROLE_ADMIN])) {
+            throw new HttpException(403,
+                Yii::t('app', 'Вам не разрешено выполнять это действие.'));
+        }
+
         $model = new Service();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {

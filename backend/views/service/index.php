@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\ServiceSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Services';
+$this->title = 'Услуги';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="service-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Service', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать услугу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'code',
             'price',
-            'description:ntext',
+            'description:html',
             //'status',
             //'city',
             //'validity',
