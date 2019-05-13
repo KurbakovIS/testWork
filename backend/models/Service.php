@@ -63,7 +63,7 @@ class Service extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
+            'id' => '№ услуги',
             'name' => 'Название',
             'code' => 'Код',
             'price' => 'Цена',
@@ -75,4 +75,9 @@ class Service extends ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+    function debug($arr)
+    {
+        echo '<pre>' . print_r($arr, true) . '</pre>';
+    }
+
 }

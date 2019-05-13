@@ -32,6 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'price',
             'description:html',
             //'status',
+            [
+                'attribute' => 'status',
+                'value' => function ($data) {
+                    return !$data->status ? '<span class="text-danger">Выключена</span>' :
+                        '<span class="text-success">Включена</span>';
+                },
+                'format' => 'html',
+            ],
             //'city',
             //'validity',
             //'created_at',
