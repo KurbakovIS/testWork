@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use nhkey\arh\ActiveRecordHistoryBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -32,6 +33,7 @@ class Service extends ActiveRecord
         return 'service';
     }
 
+// yii migrate --migrationPath=@vendor/nhkey/yii2-activerecord-history/migrations   - Команда для миграции таблицы логирования
     public function behaviors()
     {
         return [
@@ -42,6 +44,10 @@ class Service extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at']
                 ],
                 'value' => new Expression('NOW()')
+            ],
+            'history' => [
+                'class' => ActiveRecordHistoryBehavior::class,
+//                'ignoreFields' => ['updated_at', 'some_other_field'],
             ],
         ];
     }

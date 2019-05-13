@@ -38,6 +38,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Главная', 'url' => ['/site']],
         ['label' => 'Услуги', 'url' => ['/service']],
+        ['label' => 'История изменений', 'url' => ['/modelhistory']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

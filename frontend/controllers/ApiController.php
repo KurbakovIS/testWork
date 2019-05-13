@@ -26,7 +26,7 @@ class ApiController extends ActiveController
     {
         $filter = Yii::$app->request->get('filter');
         $query = Service::find();
-        if($filter){
+        if ($filter) {
             $query->filterWhere($filter);
         }
 
