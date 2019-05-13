@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -31,6 +31,7 @@ class Service extends ActiveRecord
     {
         return 'service';
     }
+
     public function behaviors()
     {
         return [
@@ -44,6 +45,7 @@ class Service extends ActiveRecord
             ],
         ];
     }
+
     /**
      * {@inheritdoc}
      */
@@ -75,7 +77,8 @@ class Service extends ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
-    function debug($arr)
+
+    public function debug($arr)
     {
         echo '<pre>' . print_r($arr, true) . '</pre>';
     }

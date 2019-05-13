@@ -4,8 +4,8 @@ namespace backend\controllers;
 
 use common\models\User;
 use Yii;
-use app\models\Service;
-use app\models\ServiceSearch;
+use common\models\Service;
+use common\models\ServiceSearch;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;

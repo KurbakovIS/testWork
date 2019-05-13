@@ -1,4 +1,8 @@
 <?php
+
+use yii\rest\UrlRule;
+use yii\web\JsonParser;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -10,10 +14,14 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => '/site',
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+                'application/json' => JsonParser::class
+            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -40,7 +48,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/'=>'site/index'
+                ['class' => UrlRule::class, 'controller' => ['api']]
             ],
         ],
     ],
